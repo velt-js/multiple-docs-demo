@@ -26,6 +26,7 @@ export default function ShipmentsTracker() {
   useEffect(() => { 
     console.log("documents", documents);
     setDocuments(documents);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { data: annotationsCount } = useCommentAnnotationsCount();
