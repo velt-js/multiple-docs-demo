@@ -6,7 +6,7 @@ import { shipments } from "@/types/shipment"
 import ShipmentHeader from "./ShipmentHeader"
 import ShipmentListHeader from "./ShipmentListHeader"
 import ShipmentListSkeleton from "./ShipmentListSkeleton"
-import { useCommentAnnotationsCount, useSetDocuments, useVeltClient } from "@veltdev/react"
+import { useCommentAnnotationsCount, useSetDocuments } from "@veltdev/react"
 
 const ShipmentList = dynamic(() => import("./ShipmentList"), {
   loading: () => <ShipmentListSkeleton />,
