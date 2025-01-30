@@ -1,5 +1,4 @@
 import { VeltSidebarButton } from "@veltdev/react"
-import { MessageSquare } from "lucide-react"
 
 export default function ShipmentHeader() {
   return (

@@ -6,7 +6,7 @@ import { shipments } from "@/types/shipment"
 import ShipmentHeader from "./ShipmentHeader"
 import ShipmentListHeader from "./ShipmentListHeader"
 import ShipmentListSkeleton from "./ShipmentListSkeleton"
-import { useCommentAnnotationsCount, useGetCommentAnnotations, useVeltClient } from "@veltdev/react"
+import { useCommentAnnotationsCount, useVeltClient } from "@veltdev/react"
 
 const ShipmentList = dynamic(() => import("./ShipmentList"), {
   loading: () => <ShipmentListSkeleton />,
@@ -30,14 +30,6 @@ export default function ShipmentsTracker() {
       client.setDocuments(documents);
     }
   }, [client]);
-
-  // const { data: annotationsData } = useGetCommentAnnotations();
-
-  // useEffect(() => {
-  //   if (annotationsData) {
-  //     console.log("commentAnnotations", annotationsData);
-  //   }
-  // }, [annotationsData]);
 
   const { data: annotationsCount } = useCommentAnnotationsCount();
 
