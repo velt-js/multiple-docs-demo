@@ -3,14 +3,26 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MessageSquare, MoreHorizontal, Share } from "lucide-react"
 import type { Shipment } from "@/types/shipment"
-import { VeltInlineCommentsSection } from "@veltdev/react"
+import { useSetLocation, VeltInlineCommentsSection } from "@veltdev/react"
 
-export default function ShipmentList({ shipments }: { shipments: Shipment[] }) {
+export const SetAdditionalLocation = (props: { id: string, name: string }) => {
+  useSetLocation({
+      id: props.id,
+      locationName: props.name,
+  }, true)
+  return (
+      <></>
+  )
+}
+
+export default function ShipmentList({ shipments, documentId }: { shipments: Shipment[], documentId: string }) {
   return (
     <Accordion type="single" collapsible className="w-full">
       {shipments.map((shipment) => (
         <AccordionItem key={shipment.id} value={shipment.id} className="border-b border-gray-800">
           <AccordionTrigger className="hover:no-underline w-full">
+          <SetAdditionalLocation key={shipment.id} id={shipment.id} name={shipment.shipmentName} />
+
             <div className="grid grid-cols-4 gap-4 w-full py-4">
               <div className="text-left">
                 <div className="font-medium text-white">{shipment.id}</div>
@@ -51,14 +63,14 @@ export default function ShipmentList({ shipments }: { shipments: Shipment[] }) {
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="border-t border-gray-800" id={shipment.id} data-velt-document-id={shipment.id}>
-            <div className="py-4">
-              <h3 className="font-medium mb-2 text-white">Shipment Details</h3>
-              <p className="text-gray-400">Additional information about the shipment would go here...</p>
-            </div>
-            <VeltInlineCommentsSection
-              targetElementId={shipment.id}
-            />
+          <AccordionContent className="border-t border-gray-800" id={documentId + "_" + shipment.id} data-velt-location-id={shipment.id}>
+                <VeltInlineCommentsSection
+                  sortBy="lastUpdated"
+                  sortOrder="desc"
+                  composerPosition="top"
+                  multiThread={false}
+                  targetElementId={documentId + "_" + shipment.id}
+                />
           </AccordionContent>
         </AccordionItem>
       ))}
