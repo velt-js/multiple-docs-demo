@@ -2,20 +2,20 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { MessageSquare, MoreHorizontal, Share } from "lucide-react"
-import type { Shipment } from "@/types/shipment"
+import type { Location } from "@/types/shared/location"
 import { useSetLocation, VeltInlineCommentsSection } from "@veltdev/react"
 
 export const SetAdditionalLocation = (props: { id: string, name: string }) => {
   useSetLocation({
-      id: props.id,
-      locationName: props.name,
-  }, true)
+    id: props.id,
+    locationName: props.name,
+  })
   return (
       <></>
   )
 }
 
-export default function ShipmentList({ shipments, documentId }: { shipments: Shipment[], documentId: string }) {
+export default function ShipmentList({ shipments, documentId }: { shipments: Location[], documentId: string }) {
   return (
     <Accordion type="single" collapsible className="w-full">
       {shipments.map((shipment) => (
@@ -63,7 +63,7 @@ export default function ShipmentList({ shipments, documentId }: { shipments: Shi
               </div>
             </div>
           </AccordionTrigger>
-          <AccordionContent className="border-t border-gray-800" id={documentId + "_" + shipment.id} data-velt-location-id={shipment.id}>
+          <AccordionContent className="border-t border-gray-800" id={documentId + "_" + shipment.id}>
                 <VeltInlineCommentsSection
                   sortBy="lastUpdated"
                   sortOrder="desc"
